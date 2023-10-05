@@ -32,6 +32,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
+    points = models.IntegerField(default=0)
+    goals = models.IntegerField(default=0)
+    win = models.BooleanField(default=True)
 
     # Additional fields specific to your CustomUser model...
 

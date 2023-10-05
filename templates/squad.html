@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+<body class="squad-body">
+	<header class="squad-header">
+	</header>
+	<main class="squad-main">
+		<div class="squad-pitch">
+			<h4>4-3-3</h4>
+			<div class="squad-container">
+				<div class="box1">
+					<div class="pen1">
+                        {% with squad_data|first as first_member %}
+						<div class="pos {{first_member.1.position}}" style="margin:{{first_member.1.margin}}">{{first_member.0.number}}</div>
+                        {% endwith %}
+					</div>
+				</div>
+                {% for team_member, position_data in squad_data|slice:'1:' %}
+				<div class="pos {{position_data.position}}" style="margin: {{position_data.margin}}">{{team_member.number}}</div>
+                {% endfor %}
+
+				<div class="half"></div>
+				<div class="box2">
+					<div class="pen2"></div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		<main>
+</body>
+{% endblock %}

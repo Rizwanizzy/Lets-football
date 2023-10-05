@@ -480,7 +480,7 @@ li > a:only-child:after {
 /*--banner--*/
 .main-sec {
     background: #74d2e7;
-    min-height: 15em;
+    min-height: 11em;
     position: relative;
 }
 

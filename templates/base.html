@@ -19,9 +19,11 @@
     </script>
     <!-- //Meta tag Keywords -->
     <!-- Custom-Files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css ' %}">
     <!-- Bootstrap-Core-CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css ' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/squad.css ' %}" type="text/css" media="all" />
     <!-- Style-CSS -->
     <!-- font-awesome-icons -->
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
@@ -48,44 +50,27 @@
                         <a href="{% url 'logout' %}" class="btn"><span class="fa fa-pencil-square-o"></span>logout</a>
                         {% else %}
                         <a href="{% url 'login' %}" class="btn"><span class="fa fa-user-circle-o"></span> Sign In</a>
-                        <a href="{% url 'register' %}" class="btn"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
+                        <a href="{% url 'register' %}" class="btn" id="signup-link"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
                         {% endif %}
                     </div>
                 </div>
                 <div class="nav-top-wthree">
+                    
                     <nav>
                         <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                         <input type="checkbox" id="drop" />
                         <ul class="menu">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li>
-                                <!-- First Tier Drop Down -->
-                                <label for="drop-2" class="toggle">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span>
-                                </label>
-                                <a href="#">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                                <input type="checkbox" id="drop-2" />
-                                <ul>
-                                    <li><a href="coming.html" class="drop-text">Services</a></li>
-                                    <li><a href="about.html" class="drop-text">Features</a></li>
-                                    <li><a href="single.html" class="drop-text">Single Page</a></li>
-
-                                </ul>
-                            </li>
-
+                            {% if user.is_authenticated %}
+                            <li class="active"><a href="{% url 'home' %}">Home</a></li>  
+                            <li><a href="{% url 'squad' %}">Squad</a></li>
+                            {% else %}
+                                                   
                             <li><a href="shop.html">Collections</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                     <!-- //nav -->
-                    <div class="search-form ml-auto">
-                        <div class="form-w3layouts-grid">
-                            <form action="#" method="post" class="newsletter">
-                                <input class="search" type="search" placeholder="Search here..." required="">
-                                <button class="form-control btn" value=""><span class="fa fa-search"></span></button>
-                            </form>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -96,100 +81,12 @@
 
     <!-- //banner-->
     
-
     {% block content %}
     {% endblock %}
-
-    <!--/shipping-->
-    <section class="shipping-wthree">
-        <div class="shiopping-grids d-lg-flex">
-            <div class="col-lg-4 shiopping-w3pvt-gd text-center">
-                <div class="icon-gd"><span class="fa fa-truck" aria-hidden="true"></span>
-                </div>
-                <div class="icon-gd-info">
-                    <h3>FREE SHIPPING</h3>
-                    <p>On all order over $2000</p>
-                </div>
-            </div>
-            <div class="col-lg-4 shiopping-w3pvt-gd sec text-center">
-                <div class="icon-gd"><span class="fa fa-bullhorn" aria-hidden="true"></span></div>
-                <div class="icon-gd-info">
-                    <h3>FREE RETURN</h3>
-                    <p>On 1st exchange in 30 days</p>
-                </div>
-            </div>
-            <div class="col-lg-4 shiopping-w3pvt-gd text-center">
-                <div class="icon-gd"> <span class="fa fa-gift" aria-hidden="true"></span></div>
-                <div class="icon-gd-info">
-                    <h3>MEMBER DISCOUNT</h3>
-                    <p>Register &amp; save up to $29%</p>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-    <!--//shipping-->
+    
     <!-- footer -->
     <div class="footer_agileinfo_topf py-5">
         <div class="container py-md-5">
-            <div class="row">
-                <div class="col-lg-3 footer_wthree_gridf mt-lg-5">
-                    <h2><a href="index.html"><span>B</span>aggage
-                        </a> </h2>
-                    <label class="sub-des2">Online Store</label>
-                </div>
-                <div class="col-lg-3 footer_wthree_gridf mt-md-0 mt-4">
-                    <ul class="footer_wthree_gridf_list">
-                        <li>
-                            <a href="index.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Home</a>
-                        </li>
-                        <li>
-                            <a href="about.html"><span class="fa fa-angle-right" aria-hidden="true"></span> About</a>
-                        </li>
-                        <li>
-                            <a href="shop.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Shop</a>
-                        </li>
-                        <li>
-                            <a href="shop.html"><span class="fa fa-angle-right" aria-hidden="true"></span>Collections</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-lg-3 footer_wthree_gridf mt-md-0 mt-sm-4 mt-3">
-                    <ul class="footer_wthree_gridf_list">
-                        <li>
-                            <a href="single.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Extra Page</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span> Terms & Conditions</a>
-                        </li>
-                        <li>
-                            <a href="single.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Shop Single</a>
-                        </li>
-                        <li>
-                            <a href="contact.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 footer_wthree_gridf mt-md-0 mt-sm-4 mt-3">
-                    <ul class="footer_wthree_gridf_list">
-                        <li>
-                            <a href="login.html"><span class="fa fa-angle-right" aria-hidden="true"></span> Login </a>
-                        </li>
-
-                        <li>
-                            <a href="register.html"><span class="fa fa-angle-right" aria-hidden="true"></span>Register</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span>Privacy & Policy</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
 
             <div class="w3ls-fsocial-grid">
                 <h3 class="sub-w3ls-headf">Follow Us</h3>
@@ -208,15 +105,40 @@
     </div>
     <!-- //footer -->
 
-    <!-- copyright -->
-    <div class="cpy-right text-center py-3">
-        <p>© 2019 Baggage. All rights reserved | Design by
-            <a href="http://w3layouts.com"> W3layouts.</a>
-        </p>
-
-    </div>
-    <!-- //copyright -->
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Your modal initialization code -->
+    <script>
+        $('#exampleModal').modal(options);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#signup-link').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{% url "check_signup" %}',
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.is_signup_allowed) {
+                            // Allow sign-up, redirect to the sign-up page or show the sign-up form
+                            window.location.href = '{% url "register" %}';
+                        } else {
+                            // Display a message that sign-up is not allowed
+                            alert('Sorry total no.of limit exceeded.');
+                        }
+                    },
+                    error: function () {
+                        // Handle any errors here
+                        alert('An error occurred while checking sign-up availability.');
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
-
 </html>
