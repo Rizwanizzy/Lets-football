@@ -5,11 +5,15 @@
     
 <body class="squad-body">
 	<header class="squad-header">
+		<h3 style='text-align:center'>{{user}}</h3>
 	</header>
 	<main class="squad-main">
+		
+		{% if display %}
 		<div class="squad-pitch">
 			<h4>4-3-3</h4>
 			<div class="squad-container">
+				
 				<div class="box1">
 					<div class="pen1">
                         {% with squad_data|first as first_member %}
@@ -21,14 +25,19 @@
 				<div class="pos {{position_data.position}}" style="margin: {{position_data.margin}}">{{team_member.number}}</div>
                 {% endfor %}
 
+				
+
 				<div class="half"></div>
 				<div class="box2">
 					<div class="pen2"></div>
 				</div>
+				
 			</div>
 		</div>
-
+		{% else %}
+		<h3 style='margin-top:-180px'>Add 11 Players in your Team</h3>
+		{% endif %}
 		</div>
-		<main>
+	<main>
 </body>
 {% endblock %}

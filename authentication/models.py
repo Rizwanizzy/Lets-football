@@ -34,7 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     points = models.IntegerField(default=0)
     goals = models.IntegerField(default=0)
-    win = models.BooleanField(default=True)
+    win = models.BooleanField(default=False)
 
     # Additional fields specific to your CustomUser model...
 

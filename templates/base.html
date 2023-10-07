@@ -42,7 +42,7 @@
                 <!-- nav -->
                 <div class="top-w3pvt d-flex">
                     <div id="logo">
-                        <h1> <a href="index.html"><span class="log-w3pvt">B</span>aggage</a> <label class="sub-des">Online Store</label></h1>
+                        <h1> <a href="{% url 'standings' %}"><img src="{% static 'images/logo2.png' %}" width="130px" height="80px" alt=""></a> <label class="sub-des">Come let's play</label></h1>
                     </div>
 
                     <div class="forms ml-auto">
@@ -56,19 +56,47 @@
                 </div>
                 <div class="nav-top-wthree">
                     
-                    <nav>
+                    <nav class="navbar navbar-expand-lg">
                         <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                         <input type="checkbox" id="drop" />
-                        <ul class="menu">
-                            {% if user.is_authenticated %}
-                            <li class="active"><a href="{% url 'home' %}">Home</a></li>  
-                            <li><a href="{% url 'squad' %}">Squad</a></li>
-                            {% else %}
-                                                   
-                            <li><a href="shop.html">Collections</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            {% endif %}
-                        </ul>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="menu">
+                                    {% if user.is_authenticated %}
+
+                                        {% if user.is_superuser %}
+
+                                        <li class="active"><a href="{% url 'admin_home' %}">Home</a></li>  
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Fixture
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{% url 'round_1' %}">Round-1</a>
+                                            <a class="dropdown-item" href="{% url 'semifinals' %}">Semi-finals</a>
+                                            <a class="dropdown-item" href="{% url 'finals' %}">Finals</a>
+                                        </li>
+                                        {% else %}
+
+                                        <li class="active"><a href="{% url 'home' %}">Home</a></li>  
+                                        <li><a href="{% url 'squad' %}">Squad</a></li>
+
+                                        {% endif %}
+                                        
+                                    {% else %}
+                                                        
+                                    <li><a href="{% url 'standings' %}">Standings</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Fixture
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'round_1' %}">Round-1</a>
+                                        <a class="dropdown-item" href="{% url 'semifinals' %}">Semi-finals</a>
+                                        <a class="dropdown-item" href="{% url 'finals' %}">Finals</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
                     </nav>
                     <!-- //nav -->
                     <div class="clearfix"></div>
@@ -138,6 +166,7 @@
                 });
             });
         });
+        
     </script>
 
 </body>

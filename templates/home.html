@@ -5,8 +5,10 @@
     
     <section class="banner-bottom mt-5 py-5" style="min-height: 250px;">
         <div class='container'>
+          <div style='display:flex'>
+            <h3 class='mx-auto'>{{user}}</h3>
             <button type="button" style='float:right' class="btn btn-info mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Player</button>
-
+          </div>
             <div style='align-items: center; justify-content: space-between;'>
                 {% if members %}
                 <table class="table table-dark mr-3" style="text-align: center;">

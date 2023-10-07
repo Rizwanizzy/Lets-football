@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <section class="banner-bottom mt-5 py-5" style="min-height: 250px;">
+        <div class='container'>
+          <div style='display:flex'>
+            <h3 class='mx-auto mb-3'>Round 1</h3>
+            {% comment %} <button type="button" style='float:right' class="btn btn-info mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Player</button> {% endcomment %}
+          </div>
+
+            <div style='align-items: center; justify-content: space-between;'>
+                {% if count %}
+                    {% if display %}
+                    <table class="table table-dark mr-3" style="text-align: center;">
+                        <thead>
+                        <tr>
+                            <th scope="col">Venue</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Team1</th>
+                            <th scope="col" colspan="2">Result</th>
+                            <th scope="col">Team2</th>
+                            <th scope="col">Group</th>
+                            {% if user.is_superuser %}
+                            <th scope="col">Actions</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for fixture in fixture_all %}
+                            <tr>
+                                <th scope="row">{{fixture.venue}}</th>
+                                <td>{{fixture.date}}</td>
+                                <td>{{fixture.time}}</td>
+                                <td>{{fixture.team1}}</td>
+                                <td>{{fixture.result1}}</td>
+                                <td>{{fixture.result2}}</td>
+                                <td>{{fixture.team2}}</td>
+                                <td>{{fixture.group}}</td>
+                                {% if user.is_superuser %}
+                                <td>
+                                    <a href="" data-toggle="modal" data-target="#matchModal{{ fixture.id }}">Update</a>
+                                </td>
+                                {% endif %}
+                            </tr>        
+                            <div class="modal fade" id="matchModal{{ fixture.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header mx-auto">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{fixture.team1}} vs {{fixture.team2}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action={% url 'update_match' fixture.id %} method='post'>
+                                    {% csrf_token %}
+                                    <div class="container form-group">
+                                        <label for="recipient-name" class="col-form-label"><b>Venue:</b>{{fixture.venue}}</label>
+                                    </div>
+                                    <div class=" container form-group" style='display:flex;justify-content: space-between'>
+                                        <label for="recipient-name" class="col-form-label"><b>Date:</b>{{fixture.date}}</label>
+                                        <label for="recipient-name" class="col-form-label"><b>time:</b>{{fixture.time}}</label>
+                                    </div>
+                                    <div class=" container form-group" style='display:flex;justify-content: space-between'>
+                                        <label for="recipient-name" class="col-form-label"><b>Goals:</b></label>
+                                        <input type="number" class="form-control" id="name" name='result1' style='width:15%;margin-left:-138px' value="{{fixture.result1}}" min="0">
+
+                                        <label for="recipient-name" class="col-form-label"><b>Goals:</b></label>
+                                        <input type="number" class="form-control" id="name" name='result2' style='width:15%;margin-left:-133px' value="{{fixture.result2}}" min="0">
+
+                                    </div>
+                                    <div style='text-align: center;'>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Update Score</button>
+                                    </div>
+                                    </form>
+                                </div>
+                
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                    {% if user.is_superuser %}
+                    {% endif %}
+                    {% else %}
+                        {% if user.is_superuser %}
+                            <form method='post' class="mt-5" style="text-align: center;">
+                                {% csrf_token %}
+                                <input type="date" name="date">
+                                <button class="btn btn-info">Get the fixture</button>
+                            </form>
+                        {% else %}
+                            <h3>Fixture not scheduled yet</h3>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                <h3>Need more teams to register</h3>
+                {% endif %}
+                
+            </div>
+        </div>
+    </section>
+    <!-- //gallery-->
+{% endblock %}
